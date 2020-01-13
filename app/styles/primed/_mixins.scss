@@ -1,0 +1,87 @@
+/*
+ * Mixins
+ *
+ * Breakpoint Media Queries, Colorization, and some other mixin utilities.
+ */
+
+//——————————————————————————————————————————————————————————————————————————————
+// Breakpoint Mixins
+//——————————————————————————————————————————————————————————————————————————————
+
+/* Generic Sizes */
+
+// Larger than $minimum-width...
+@mixin min-width($minimum-width: 560px) {
+  @media screen and (min-width: $minimum-width){
+    @content;
+  }
+}
+
+// Up to $maximum-width...
+@mixin max-width($maximum-width: 560px) {
+  @media screen and (max-width: $maximum-width){
+    @content;
+  }
+}
+
+/* Specific Common Sizes */
+
+// Media query for mobile first layout
+@mixin small-breakpoint {
+  @media (min-width: #{$x-smaller}) {
+    @content;
+  }
+}
+
+// Break on tablet
+@mixin medium-breakpoint {
+  @media (min-width: #{$x-small}) {
+    @content;
+  }
+}
+
+// Break on desktop
+@mixin large-breakpoint {
+  @media (min-width: #{$medium}) {
+    @content;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+// Utilities
+//——————————————————————————————————————————————————————————————————————————————
+
+$prop_color: 'color';
+$prop_border-color: 'border-color';
+$prop_bg-color: 'border-color';
+
+@use "sass:map";
+
+$light-weights: ("lightest": 100, "light": 300);
+$heavy-weights: ("medium": 500, "bold": 700);
+
+$states: ("hover": 10%, "focus": 20%, "active":30%);
+
+@mixin stylesForStates($_cl:false,$_bg:false,$_bd:false, $_color: white, $_background: #000, $_border: #000) {
+  @each $statename, $amount in $states {
+    &:#{$statename} {
+      @if($_cl == true) {
+        color: shade($_color, $amount);
+      }
+      @if($_bg == true) {
+        background-color: shade($_background, $amount);
+      }
+      @if($_bd == true) {
+        border-color: shade($_border, $amount);
+      }
+    }
+  }
+}
+@mixin forAllStates {
+  &:hover, &:focus, &:active {
+    @content;
+  }
+}
+//——————————————————————————————————————————————————————————————————————————————
+// Buttons
+//——————————————————————————————————————————————————————————————————————————————

@@ -1,0 +1,92 @@
+
+
+
+[role=navigation] {
+  background: $alternate-color;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  a {
+    text-decoration: none !important;
+    line-height: 3;
+    background: $alternate-color;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0 1em;
+    user-select: none !important;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    border: $alternate-color solid 2px;
+    width: 100%;
+    @include stylesForStates(true, true, true,white, $alternate-color, $alternate-color);
+    transition-delay: 0ms !important;
+  }
+  li.active a, a.active {
+    background: $primary-color;
+    touch-action: none;
+    cursor: not-allowed;
+    color: rgba(white, 0.75);
+    @include forAllStates {
+      background: $primary-color;
+      color: white;
+      touch-action: none !important;
+      pointer-events: none !important;
+      cursor: not-allowed;
+    }
+  }
+
+
+
+  @include small-breakpoint {
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      align-content: center;
+      justify-content: flex-end;
+    }
+    li {
+
+    }
+    a {
+
+    }
+
+  }
+
+
+}
+
+@media screen and (min-width: $mobile) {
+  [role=navigation] ul {
+    //max-width: $large;
+    //width: unset !important;
+    width: 90%;
+    max-width: $small;
+    padding: 0 $padding;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

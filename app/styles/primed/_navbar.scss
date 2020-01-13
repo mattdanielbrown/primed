@@ -1,0 +1,157 @@
+/*
+ * Naviagtion Bar
+ *
+ * Responsive, Mobile-First Collapsing Navigation Bar
+ */
+
+$nav-bg-color: $alternate-color;
+
+@mixin unstyledList($_direction: vertical) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  @if($_direction == vertical) {
+    li { display: block; }
+  } else { li {
+          display: inline-block;
+        } }
+}
+
+%navbar {
+  background: $nav-bg-color;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  transition: all 120ms;
+  transition-delay: 80ms;
+  * {
+    transition: all 120ms;
+
+  }
+  ul {
+    transition-delay: 80ms;
+    user-select: none !important;
+    @include unstyledList(vertical);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: flex-start;
+  }
+  li {
+    transition-delay: 80ms;
+    user-select: none !important;
+    //display: inline;
+  }
+  a {
+    user-select: none !important;
+    cursor: pointer;
+    line-height: 3;
+    text-align: center;
+    display: block;
+    color: white;
+    text-decoration: none;
+    background: $nav-bg-color;
+    border: $nav-bg-color solid 2px;
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    @include stylesForStates(true, true, true,white, $nav-bg-color, $nav-bg-color);
+    transition-delay: 0ms !important;
+  }
+  li.active a, a.active {
+    background: $primary-color;
+    touch-action: none;
+    cursor: not-allowed;
+    color: rgba(white, 0.75);
+    @include forAllStates {
+      background: $primary-color;
+      color: white;
+      touch-action: none !important;
+      pointer-events: none !important;
+      cursor: not-allowed;
+    }
+  }
+
+  text-align: right;
+  @include min-width(600px) {
+    ul {
+      flex-direction: row ;
+      justify-content: flex-end;
+      width: 96%;
+      max-width: $x-small;
+      margin: 0 auto;
+      text-align: right;
+    }
+    li, a {
+      display: inline-block !important;
+      width: unset !important;
+    }
+  }
+  @include small-breakpoint {
+    text-align: right;
+    ul {
+      text-align: right;
+      flex-direction: row;
+      width: 90%;
+      max-width: $small;
+    }
+  }
+  @include medium-breakpoint {
+    text-align: right;
+    ul {
+      text-align: right;
+      flex-direction: row;
+      width: 85%;
+      max-width: $medium;
+    }
+  }
+}
+
+nav>ul {
+  @include min-width(600px) {
+    flex-direction: row ;
+    width: 96%;
+    max-width: $x-small;
+    margin: 0 auto;
+  }
+  @include small-breakpoint {
+    flex-direction: row;
+    width: 90%;
+    max-width: $small;
+  }
+  @include medium-breakpoint {
+    flex-direction: row;
+    width: 85%;
+    max-width: $medium;
+  }
+}
+
+@media screen and (min-width: 600px){
+  nav ul {
+    flex-direction: row !important;
+
+    li {
+      //display: inline !important;
+      margin: 0 !important;
+      border-collapse: collapse !important;
+    }
+    a {
+      border-collapse: collapse !important;
+      display: inline-block !important;
+      padding: 0 1em;
+      margin: 0;
+    }
+  }
+}
+
+[role=navigation] { @extend %navbar; }

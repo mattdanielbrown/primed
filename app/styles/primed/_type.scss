@@ -1,0 +1,220 @@
+*, *::before, *:before, *:after, *::after, :root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-family !important;
+  //font: $font-style  $body-font-weight #{$font-size}/#{$line-height} $font-family;
+
+  font-size: $font-size;
+}
+
+html, body, p {
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+html {
+  font-size: 16px;
+  @include small-breakpoint {
+    font-size: 18px;
+  }
+  @include medium-breakpoint {
+    font-size: 19px !important;
+  }
+}
+
+
+$line-height              : 1.6                                        !default;
+
+// Headings
+$heading-font-color       : #404040 !default;
+$heading-font-weight      : 600 !default;
+
+$heading-line-height      : 1.2 !default;
+
+// Mobile heading font size
+$h1-mobile                : 1.75rem !default;
+$h2-mobile                : 1.5rem !default;
+$h3-mobile                : 1.25rem !default;
+$h4-mobile                : 1.1rem !default;
+$h5-mobile                : 1rem !default;
+
+// Heading font size
+$h1                       : 2.25rem !default;
+$h2                       : 2rem !default;
+$h3                       : 1.75rem !default;
+$h4                       : 1.5rem !default;
+$h5                       : 1.25rem !default;
+
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: $margins 0;
+  font-weight: $heading-font-weight;
+  //font-family: $heading-font-family;
+  line-height: $heading-line-height;
+  color: $heading-font-color;
+
+  &:not(:first-child) {
+    margin: 1.5rem 0;
+  }
+}
+
+// Increased margin on additional headings
+h1:not(:first-child),
+h2:not(:first-child),
+h3:not(:first-child) {
+  margin-top: 2rem;
+}
+
+// Heading individual styles
+h1 {
+  font-size: $h1-mobile;
+}
+
+h2 {
+  font-size: $h2-mobile;
+}
+
+h3 {
+  font-size: $h3-mobile;
+}
+
+h4 {
+  font-size: $h4-mobile;
+}
+
+h5 {
+  font-size: $h5-mobile;
+}
+
+@include small-breakpoint {
+
+  // Increased margin on additional headings
+  h1:not(:first-child),
+  h2:not(:first-child),
+  h3:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+
+  // Heading desktop individual styles
+  h1 {
+    font-size: $h1;
+  }
+
+  h2 {
+    font-size: $h2;
+  }
+
+  h3 {
+    font-size: $h3;
+  }
+
+  h4 {
+    font-size: $h4;
+  }
+
+  h5 {
+    font-size: $h5;
+  }
+}
+
+// Link styling
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+// Highlight
+mark {
+  background: $highlight;
+  padding: 0 0.2rem;
+}
+
+// Blockquote
+blockquote {
+  margin: 0 0 $margins 0;
+  border-left: $bq-border;
+  padding: 0 1.5rem;
+  font-size: 1.5rem;
+
+  cite {
+    display: block;
+    margin-top: $margins;
+    font-size: 1rem;
+    text-align: right;
+  }
+}
+
+// Code block styling
+pre {
+  border: 0;
+  border-radius: $border-radius;
+  background: $code-background;
+  padding: 1rem;
+  tab-size: 2;
+  color: $code-color;
+  font-family: $code-family;
+  font-size: $code-size;
+  margin: 0 0 $margins 0;
+
+  code {
+    font-family: $code-family;
+    line-height: 1.2;
+  }
+}
+
+// Keyboard input
+
+
+// Inline code styling
+:not(pre)>code {
+  color: $code-color;
+  background: $code-background;
+  font-family: $code-family;
+  font-size: $code-size;
+  padding: 0 0.2rem;
+  border: $borders;
+  border-radius: $border-radius;
+}
+
+// Line break
+hr {
+  height: 0;
+  border: 0;
+  border-top: $borders;
+}
+
+// Definition list
+dt {
+  font-weight: 600;
+}
+
+dd {
+  margin-bottom: .5rem;
+}
+
+figure {
+  margin: 1em auto 2em;
+  padding: 0;
+  text-align: center;
+  img {
+    border-radius: 4px;
+  }
+}
+figcaption {
+  p {
+    font-size: small;
+    text-align: center;
+    margin: 0.25em auto 1em auto;
+  }
+}

@@ -1,0 +1,242 @@
+// Media query for mobile first layout
+@mixin small-breakpoint {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+// Break on tablet
+@mixin medium-breakpoint {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+// Break on desktop
+@mixin large-breakpoint {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+
+//——————————————————————————————————————————————————————————————————————————————
+// Utilities
+//——————————————————————————————————————————————————————————————————————————————
+
+$prop_color: 'color';
+$prop_border-color: 'border-color';
+$prop_bg-color: 'border-color';
+
+@use "sass:map";
+
+$light-weights: ("lightest": 100, "light": 300);
+$heavy-weights: ("medium": 500, "bold": 700);
+
+$states: ("hover": 10%, "focus": 20%, "active":30%);
+
+@mixin stylesForStates($_cl:false,$_bg:false,$_bd:false, $_color: white, $_background: #000, $_border: #000) {
+  @each $statename, $amount in $states {
+    &:#{$statename} {
+      @if($_cl == true) {
+        color: shade($_color, $amount);
+      }
+      @if($_bg == true) {
+        background-color: shade($_background, $amount);
+      }
+      @if($_bd == true) {
+        border-color: shade($_border, $amount);
+      }
+    }
+  }
+}
+@mixin forAllStates {
+  &:hover, &:focus, &:active {
+    @content;
+  }
+}
+//——————————————————————————————————————————————————————————————————————————————
+// Buttons
+//——————————————————————————————————————————————————————————————————————————————
+@function hoverAdjustedColor($base-color: $primary-color) {
+  @return shade($base-color, 10%);
+}
+@function focusAdjustedColor($base-color: $primary-color) {
+  @return shade($base-color, 15%);
+}
+@function activeAdjustedColor($base-color: $primary-color) {
+  @return shade($base-color, 30%);
+}
+@function adjustColorForState($base-color: $primary-color, $state: hover) {
+  @if($state == focus) { @return activeAdjustedColor($base-color); }
+  @else if($state == active) { @return focusAdjustedColor($base-color); }
+  @else { @return hoverAdjustedColor($base-color); }
+}
+@mixin buttonOfTypeAndColor($color:primary-color, $type:normal) {
+  $_thisButtonColor: $color;
+  $_hoverColor: hoverAdjustedColor($_thisButtonColor);
+  $_focusColor: focusAdjustedColor($_thisButtonColor);
+  $_activeColor: activeAdjustedColor($_thisButtonColor);
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: all 200ms;
+
+  font-family: $button-font-family;
+  font-size: $button-font-size;
+  text-transform: $button-text-transform;
+  //padding: .75rem 1.25rem;
+  padding: 0 1rem;
+  margin: 0 0 .5rem 0;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 3;
+  width: 100%;
+  display: block;
+
+  @if($type == outline) {
+    border: $_thisButtonColor solid 2px;
+    background: transparent;
+    font-weight: 500;
+    letter-spacing: 1px;
+    &:hover {
+      background: rgba($_thisButtonColor, 0.125);
+      border-color: $_hoverColor;
+      color: $_hoverColor;
+    }
+    &:focus {
+      background: rgba($_thisButtonColor, 0.25);
+      border-color: $_focusColor;
+      color: $_focusColor;
+      outline: none;
+    }
+    &:active {
+      background: rgba($_thisButtonColor, 0.5);
+      border-color: $_activeColor;
+      color: $_activeColor;
+      outline: none;
+    }
+  } @else {
+    letter-spacing: 0.5px;
+    font-weight: $button-font-weight;
+    border: $_thisButtonColor solid 2px;
+    background: $_thisButtonColor;
+    //color: $button-color;
+    color: contrast-switch($_thisButtonColor);
+
+    @if($type == round) {
+      border-radius: 48px;
+    } @else {
+      border-radius: $button-border-radius;
+    }
+
+    &:hover {
+      background: $_hoverColor;
+      border-color: $_hoverColor;
+      color: contrast-switch($_thisButtonColor);
+    }
+    &:focus {
+      background: $_focusColor;
+      border-color: $_focusColor;
+      color: contrast-switch($_thisButtonColor);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($_thisButtonColor, 0.25);
+    }
+    &:active {
+      background: $_activeColor;
+      border-color: $_activeColor;
+      color: contrast-switch($_thisButtonColor);
+    }
+  }
+
+}
+@mixin roundButtonOfColor($color:primary-color, $type:normal) {
+  $_thisButtonColor: $color;
+  $_hoverColor: hoverAdjustedColor($_thisButtonColor);
+  $_focusColor: focusAdjustedColor($_thisButtonColor);
+  $_activeColor: activeAdjustedColor($_thisButtonColor);
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: all 200ms;
+
+  font-family: $button-font-family;
+  font-size: $button-font-size;
+  text-transform: $button-text-transform;
+  //padding: .75rem 1.25rem;
+  padding: 0 1rem;
+  margin: 0 0 .5rem 0;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 3;
+  width: 100%;
+  display: block;
+
+  @if($type == outline) {
+    border: $_thisButtonColor solid 2px;
+    background: transparent;
+    font-weight: 500;
+    letter-spacing: 1px;
+    &:hover {
+      background: rgba($_thisButtonColor, 0.125);
+      border-color: $_hoverColor;
+      color: $_hoverColor;
+    }
+    &:focus {
+      background: rgba($_thisButtonColor, 0.25);
+      border-color: $_focusColor;
+      color: $_focusColor;
+      outline: none;
+    }
+    &:active {
+      background: rgba($_thisButtonColor, 0.5);
+      border-color: $_activeColor;
+      color: $_activeColor;
+      outline: none;
+    }
+  } @else {
+    letter-spacing: 0.5px;
+    font-weight: $button-font-weight;
+    border: $_thisButtonColor solid 2px;
+    background: $_thisButtonColor;
+    //color: $button-color;
+    color: contrast-switch($_thisButtonColor);
+
+    border-radius: 48px;
+
+    &:hover {
+      background: $_hoverColor;
+      border-color: $_hoverColor;
+      color: contrast-switch($_thisButtonColor);
+    }
+    &:focus {
+      background: $_focusColor;
+      border-color: $_focusColor;
+      color: contrast-switch($_thisButtonColor);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($_thisButtonColor, 0.25);
+    }
+    &:active {
+      background: $_activeColor;
+      border-color: $_activeColor;
+      color: contrast-switch($_thisButtonColor);
+    }
+  }
+
+}

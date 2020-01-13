@@ -1,0 +1,208 @@
+/**
+ * Buttons
+ */
+
+// Main button styling
+%buttons {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent !important;
+  border: $button-border-width $button-border-style $button-border-color;
+  border-radius: $button-border-radius;
+  background: $button-background;
+  color: $button-color;
+  transition: all 200ms;
+  font-weight: $button-font-weight;
+  font-family: $button-font-family;
+  font-size: $button-font-size;
+  text-transform: $button-text-transform;
+  //padding: .75rem 1.25rem;
+  padding: 0 1rem;
+  margin: 0 0 .5rem 0;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 3;
+  width: 100%;
+  display: block;
+  letter-spacing: 0.5px;
+  @include small-breakpoint {
+    line-height: 2.5;
+    display: inline-block;
+    width: unset;
+    min-width: 144px;
+  }
+}
+// Buttons on hover
+%buttons-hover {
+  border: $button-border-width $button-border-style darken($button-border-color, 10%);
+  background: $button-background-hover;
+  color: $button-color;
+  text-decoration: none;
+}
+// Buttons on focus
+%buttons-focus {
+  border: $button-border-width $button-border-style darken($button-border-color, 10%);
+  background: darken($button-background, 10%);
+  color: $button-color;
+  text-decoration: none;
+}
+// Buttons on focus
+%buttons-active {
+  border: $button-border-width $button-border-style $button-background-active;
+  background: $button-background-active;
+  color: $button-color;
+  text-decoration: none;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba($button-background-active, 0.25);
+  transform: translate3d(0, 2px, 0);
+}
+
+// Apply styles to .button class, button element, and button-based inputs
+#{$buttons} {
+  @extend %buttons;
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+  &:hover { @extend %buttons-hover; }
+  &:focus { @extend %buttons-focus; }
+  &:active { @extend %buttons-active; }
+}
+
+// Secondary button color
+.accent-button, a.accent-button {
+  color: $accent-button-color;
+  border-color: $accent-button-background;
+  background: $accent-button-background;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $accent-button-color-hover;
+    border-color: darken($accent-button-background, 10%);
+    background: darken($accent-button-background, 10%);
+  }
+}
+// Muted buttons
+.muted-button, a.muted-button {
+  background: $muted-background;
+  border: $muted-border;
+  color: $muted-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $muted-color-hover;
+    border: $muted-border-hover;
+    background: $muted-background-hover;
+  }
+}
+// Round buttons
+.round-button, a.round-button, .round, a.round {
+  border-radius: $round-buttons;
+}
+// Square buttons
+.square-button, a.square-button {
+  border-radius: 0;
+}
+// Full width buttons (block level)
+.full-button, a.full-button, .block-button, .block {
+  display: block;
+  width: 100%;
+}
+
+#{$buttons} {
+  &.secondary {
+    background: $alternate-color;
+    color: white;
+    border-color: $alternate-color;
+    @include buttonOfTypeAndColor($alternate-color, normal);
+    @include stylesForStates(false, true, true, white, $alternate-color, $alternate-color);
+  }
+  @include buttonOfTypeAndColor(#dcdcdc, normal);
+  color: #5a5a5a;
+  &.primary {
+    @include buttonOfTypeAndColor($primary-color, normal);
+  }
+  &.outline { @include buttonOfTypeAndColor(lightgray, outline);
+    font-weight: 600 !important;}
+  &.round { @include buttonOfTypeAndColor(lightgray, round); color: #5a5a5a; }
+  &.primary.outline {@include buttonOfTypeAndColor($primary-color, outline);
+    color: $primary-color;
+  }
+  &.primary.round {@include buttonOfTypeAndColor($primary-color, round);}
+  &.secondary {
+
+    &.outline {
+      @include buttonOfTypeAndColor($alternate-color, outline);
+      color: $alternate-color;
+    }
+    &.round {
+      @include buttonOfTypeAndColor($alternate-color, round);
+      color: $alternate-color;
+    }
+  }
+  &.text-only {
+    color: $primary-color;
+    font-weight: 500;
+    background: transparent;
+    border-color: transparent;
+    &:hover {
+      background: rgba($primary-color, 0.12);
+      color: $primary-color;
+    }
+    &:focus {
+      background: rgba($primary-color, 0.125);
+      color: rgba($primary-color, 0.5);
+    }
+    &:active {
+      background: rgba($primary-color, 0.25);
+      color: rgba($primary-color, 0.25);
+    }
+  }
+
+  @include small-breakpoint {
+    width: unset !important;
+    display: inline-block !important;
+    line-height: 2.5 !important;
+    margin: 0.5em 0.5em 0.5em 0 !important;
+    &:first-of-type {
+      //margin-left: 0 !important;
+    }
+  }
+}
+.round.outline {
+  &.primary {
+    //@include buttonOfTypeAndColor($primary-color, outline);
+    color: $primary-color;
+    @include roundButtonOfColor($primary-color, outline);
+    border-radius: 48px;
+  }
+}
+.secondary {
+  &.round {
+    //@include roundButtonOfColor($alternate-color, round);
+    //border-radius: 48px !important;
+    color: white;
+  }
+}
+.danger, .error {
+  @include buttonOfTypeAndColor($error, normal);
+  &.outline {
+    @include buttonOfTypeAndColor($error, outline);
+    color: $error;
+  }
+  &.round {
+    @include buttonOfTypeAndColor($error, round);
+  }
+  &.round.outline {
+    @include roundButtonOfColor($error, outline);
+  }
+}

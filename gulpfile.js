@@ -34,7 +34,7 @@ function styles() {
     .pipe($.if(!isProd, $.sourcemaps.write()))
     .pipe(dest('.tmp/styles'))
     .pipe(server.reload({stream: true}));
-};
+}
 
 function scripts() {
   return src('app/scripts/**/*.js')
@@ -44,7 +44,7 @@ function scripts() {
     .pipe($.if(!isProd, $.sourcemaps.write('.')))
     .pipe(dest('.tmp/scripts'))
     .pipe(server.reload({stream: true}));
-};
+}
 
 async function modernizr() {
   const readConfig = () => new Promise((resolve, reject) => {
@@ -153,6 +153,7 @@ const build = series(
 function startAppServer() {
   server.init({
     notify: false,
+    open: false,
     port,
     server: {
       baseDir: ['.tmp', 'app'],
@@ -177,6 +178,7 @@ function startAppServer() {
 function startTestServer() {
   server.init({
     notify: false,
+    open: false,
     port,
     ui: false,
     server: {
@@ -196,6 +198,7 @@ function startTestServer() {
 function startDistServer() {
   server.init({
     notify: false,
+    open: false,
     port,
     server: {
       baseDir: 'dist',

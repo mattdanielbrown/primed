@@ -1,0 +1,18 @@
+// Reset box sizing to border box
+html {
+  box-sizing: border-box;
+}
+
+*, :before, :after,
+*::before,
+*::after {
+  box-sizing: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Remove figure margin
+figure {
+  margin: 0;
+}
+
