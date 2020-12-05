@@ -39,7 +39,7 @@
     "kind-of": "^6.0.3",
     "mkdirp": "^0.5.1",
     "mocha": "^6.2.2",
-    "yargs": "13.2.4"
+    "yargs": "16.1.0"
   },
   "scripts": {
     "serve:test": "cross-env NODE_ENV=test gulp serve",
