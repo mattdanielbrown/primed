@@ -7,7 +7,7 @@
     "bourbon": "^6.0.0",
     "jquery": "^3.4.1",
     "modern-normalize": "^0.6.0",
-    "modernizr": "^3.7.1",
+    "modernizr": "^3.11.4",
     "modularscale-sass": "^3.0.10"
   },
   "devDependencies": {
