@@ -8,12 +8,13 @@
     "jquery": "^3.4.1",
     "modern-normalize": "^0.6.0",
     "modernizr": "^3.7.1",
-    "modularscale-sass": "^3.0.10"
+    "modularscale-sass": "^3.0.10",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "acorn": "^7.1.1",
+    "acorn": "^8.0.4",
     "autoprefixer": "^9.5.1",
     "browser-sync": "^2.26.9",
     "chai": "^4.2.0",
@@ -47,7 +48,9 @@
     "start": "gulp serve",
     "build": "cross-env NODE_ENV=production gulp",
     "test": "npm run serve:test",
-    "tasks": "gulp --tasks"
+    "tasks": "gulp --tasks",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "browserslist": [
     "> 1%",
@@ -70,5 +73,6 @@
         "single"
       ]
     }
-  }
+  },
+  "snyk": true
 }
