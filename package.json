@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.22.6",
     "acorn": "^8.0.4",
     "autoprefixer": "^9.5.1",
     "browser-sync": "^2.26.9",
